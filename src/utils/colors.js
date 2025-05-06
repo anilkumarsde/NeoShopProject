@@ -1,0 +1,17 @@
+export const colors = {
+  btnColor: '#F83758',
+  black: '#000000',
+  grey: '#A8A8A9',
+  placeholderColor: '#676767',
+  placeholderIconColor: '#626262',
+  createAcountTxtColor: '#575757',
+  backgroundColor: '#F9F9F9',
+  iconbackcolor: '#FCF3F6',
+  title: '#4392F9',
+  search: '#BBBBBB',
+  white: '#FFFFFF',
+  categoryIconcolor: '#232327',
+  categoryNameColor: '#21003D',
+  trendingbanner: '#FD6E86',
+  headerIconColor: '#780000',
+};
