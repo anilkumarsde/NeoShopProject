@@ -12,12 +12,17 @@ import Swiper from 'react-native-swiper';
 import {slidesData} from '../utils/sliderDara';
 import {fonts} from '../utils/fonts';
 import {colors} from '../utils/colors';
+import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
 const OfferSlider = () => {
+  const navigation = useNavigation();
+  const goTocommonScreen = () => {
+    navigation.navigate('Commonscreen', {searchQuery: 'home-decoration'});
+  };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Swiper
         autoplay
         autoplayTimeout={3}
@@ -38,6 +43,7 @@ const OfferSlider = () => {
                   <Text style={styles.inProductTxt}>Now in (product)</Text>
                   <Text style={styles.allColorTxt}>All colours</Text>
                   <TouchableOpacity
+                    onPress={() => goTocommonScreen()}
                     style={styles.shopNowBtn}
                     activeOpacity={0.3}>
                     <Text style={styles.shopNowtxt}>Shop Now</Text>
@@ -52,7 +58,7 @@ const OfferSlider = () => {
           </View>
         ))}
       </Swiper>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -63,7 +69,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: width * 0.04,
     height: height * 0.25,
     width: '100%',
-    marginTop:height*0.02
+    marginTop: height * 0.02,
   },
   slide: {
     flex: 1,

@@ -87,30 +87,6 @@ const Commonscreen = () => {
       }
     };
 
-    // const getAllData = async () => {
-    //   try {
-    //     setLoading(true);
-    //   const respose=await axios.get()
-
-    //     setmenshirt(menshirtRes.data.products);
-    //     setsunglasses(sunglassesRes.data.products);
-    //     setwomenbag(bagRes.data.products);
-    //     setSkincare(skincareRes.data.products);
-
-    //     const combined = [
-    //       ...menshirtRes.data.products,
-    //       ...sunglassesRes.data.products,
-    //       ...bagRes.data.products,
-    //       ...skincareRes.data.products,
-    //     ];
-    //     setSummerData(combined);
-    //   } catch (error) {
-    //     console.log('something went wrong in summer data fetch', error);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
     getSearchedData();
   }, []);
 

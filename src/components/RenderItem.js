@@ -46,7 +46,7 @@ const RenderItem = ({item}) => {
           type="star"
           startingValue={item.rating}
           readonly
-          imageSize={10}
+          imageSize={12}
           ratingBackgroundColor="transparent"
           style={styles.ratingStyle}
           transparent
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   itemDescountPercentage: {
     fontSize: width * 0.03,
     color: colors.btnColor,
-    fontFamily: fonts.MontserratRegular,
+    fontFamily: fonts.MontserratMedium,
     marginTop: width * 0.01,
   },
   infoWrapper: {
