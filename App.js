@@ -10,6 +10,7 @@ import productdetalsscreen from './src/screen/Productdetail';
 import Searchscreenproduct from './src/screen/Searchscreenproduct';
 import Commonscreen from './src/screen/Commonscreen';
 import Productdetail from './src/screen/Productdetail';
+import Retunpolicyscreen from './src/screen/Retunpolicyscreen';
 
 const App = () => {
   enableScreens();
@@ -25,10 +26,8 @@ const App = () => {
         <Stack.Screen name="Drawer" component={DrawerNavigator} />
         <Stack.Screen name="Searchscreen" component={Searchscreenproduct} />
         <Stack.Screen name="Commonscreen" component={Commonscreen} />
-        <Stack.Screen
-          name="Productdetalsscreen"
-          component={Productdetail}
-        />
+        <Stack.Screen name="Productdetalsscreen" component={Productdetail} />
+        <Stack.Screen name='Returnpolicyscreen' component={Retunpolicyscreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

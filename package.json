@@ -18,6 +18,7 @@
     "axios": "^1.9.0",
     "react": "19.0.0",
     "react-native": "0.79.1",
+    "react-native-collapsible": "^1.6.2",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-marquee-view": "^1.0.5",
     "react-native-modal": "^14.0.0-rc.1",

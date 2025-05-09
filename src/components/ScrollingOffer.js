@@ -2,13 +2,14 @@ import React from 'react';
 import {View, StyleSheet, Text, Dimensions} from 'react-native';
 import MarqueeView from 'react-native-marquee-view';
 import {fonts} from '../utils/fonts';
+import {colors} from '../utils/colors';
 const {height, width} = Dimensions.get('window');
 
 const ScrollingOffer = () => {
   return (
     <View style={styles.container}>
       <MarqueeView
-        speed={0.1}
+        speed={0.15}
         delay={0}
         autoPlay
         loop
@@ -34,12 +35,13 @@ const styles = StyleSheet.create({
   },
   marqueeContainer: {
     // height: height * 0.02,
-    // backgroundColor: '#fdd835',
-    marginTop:height*0.01
+    backgroundColor: '#662020',
+    // marginTop:height*0.01,
+    paddingVertical: height * 0.01,
   },
   marqueeText: {
     fontSize: width * 0.032,
     fontFamily: fonts.MontserratRegular,
-    color: '#000',
+    color: colors.white,
   },
 });

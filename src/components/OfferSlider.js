@@ -22,12 +22,15 @@ const OfferSlider = () => {
     navigation.navigate('Commonscreen', {searchQuery: 'home-decoration'});
   };
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => goTocommonScreen()}>
       <Swiper
         autoplay
-        autoplayTimeout={3}
+        autoplayTimeout={4}
         showsPagination={true}
         dotColor="#ccc"
+        removeClippedSubviews={false}
         // index={0}
         paginationStyle={{bottom: -20}}
         activeDotColor="#FE9EAC">
@@ -43,7 +46,6 @@ const OfferSlider = () => {
                   <Text style={styles.inProductTxt}>Now in (product)</Text>
                   <Text style={styles.allColorTxt}>All colours</Text>
                   <TouchableOpacity
-                    onPress={() => goTocommonScreen()}
                     style={styles.shopNowBtn}
                     activeOpacity={0.3}>
                     <Text style={styles.shopNowtxt}>Shop Now</Text>
@@ -83,25 +85,20 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   percentageoffer: {
     alignSelf: 'flex-start',
   },
   offerDetailsWrapper: {
     alignItems: 'flex-start',
-    // paddingVertical: height * 0.04,
     marginVertical: height * 0.04,
     paddingLeft: width * 0.029,
-    // backgroundColor: 'red',
   },
   offTxt: {
     fontSize: width * 0.065,
     fontFamily: fonts.MontserratBold,
     color: colors.white,
     marginBottom: width * 0.01,
-    // color:colors.white
   },
   inProductTxt: {
     fontSize: width * 0.036,

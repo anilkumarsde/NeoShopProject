@@ -1,23 +1,41 @@
 import {
   Dimensions,
   Image,
+  Modal,
+  Pressable,
+  ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import StatusBarCom from '../components/StatusBarCom';
 import {colors} from '../utils/colors';
 import Detailproductheader from '../components/Detailproductheader';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {fonts} from '../utils/fonts';
+import Swiper from 'react-native-swiper';
+import Commonscreen from './Commonscreen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Collapsible from '../components/Colapsible';
 const {height, width} = Dimensions.get('window');
 
 const Productdetail = () => {
   const [itemNumber, setItemNumber] = useState(0);
+  const [isvisible, setisvisible] = useState(false);
+  const [pincode, setPincode] = useState('12345');
+  const [openModal, setOpenModal] = useState(false);
+
+  const navigation = useNavigation();
+  function retunpolicyscreenHandler() {
+    navigation.navigate('Returnpolicyscreen');
+  }
+
   //   decrease item's number
   function decrement() {
     if (itemNumber > 0) {
@@ -33,60 +51,174 @@ const Productdetail = () => {
   const {item} = route.params;
   return (
     <View style={styles.container}>
-      {/* status bar */}
+      <View>
+        <Modal
+          visible={isvisible}
+          // transparent={true}
+          animationType="slide"
+          onRequestClose={() => setisvisible(false)}>
+          <TouchableOpacity
+            onPress={() => setisvisible(false)}
+            style={styles.closeModalWrapper}>
+            <Text style={styles.closemodelTxt}>X</Text>
+          </TouchableOpacity>
+          {item.images.length > 1 ? (
+            <View style={[styles.modalswiperWrapper]}>
+              <Swiper
+                dotColor="#ccc"
+                removeClippedSubviews={false}
+                paginationStyle={{bottom: -1}}
+                activeDotColor="#FE9EAC">
+                {item.images.map((img, index) => (
+                  <TouchableOpacity key={index} activeOpacity={0.6}>
+                    <Image source={{uri: img}} style={styles.modalitemImage} />
+                  </TouchableOpacity>
+                ))}
+              </Swiper>
+            </View>
+          ) : (
+            <TouchableOpacity activeOpacity={0.6}>
+              <Image source={{uri: item.images[0]}} style={styles.itemImage} />
+            </TouchableOpacity>
+          )}
+        </Modal>
+      </View>
+      <Modal
+        visible={openModal}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setOpenModal(false)}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Enter an Indian Pincode</Text>
+              <TouchableOpacity onPress={() => setOpenModal(false)}>
+                <Ionicons name="close" size={24} color={colors.black} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                placeholder="Enter Pincode"
+                value={pincode}
+                onChangeText={text => setPincode(text)}
+                keyboardType="number-pad"
+                maxLength={6}
+                style={styles.inputBox}
+              />
+              <TouchableOpacity
+                style={[
+                  styles.applyButton,
+                  pincode.length === 6 && styles.disabledButton,
+                ]}
+                disabled={pincode.length < 6}
+                onPress={() => setOpenModal(false)}>
+                <Text style={styles.applyButtonText}>Apply</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
       <StatusBarCom
         backgraoundcolor={colors.backgroundColor}
         barStyle={'dark-content'}
       />
       {/* header */}
       <Detailproductheader />
-      {/* <Text>{item.title}</Text> */}
-      <Image source={{uri: item.images[0]}} style={styles.itemImage} />
-      <View style={styles.productInfoWrapper}>
-        <View style={styles.titelWrapper}>
-          <View style={styles.leftBoxWrapper}>
-            <Text style={styles.titel} numberOfLines={1}>
-              {item.title}
-            </Text>
-            <View style={styles.reviewWrapper}>
-              <Entypo name={'star'} size={width * 0.05} color={'#FEBA0D'} />
-              <Text style={styles.itemRating}>{Math.ceil(item.rating)}.0</Text>
-            </View>
-          </View>
-          <View style={styles.rightBoxWrapper}>
-            <View style={styles.stockWrapper}>
-              <TouchableOpacity
-                style={styles.decrimentWrapper}
-                onPress={decrement}>
-                <Text>-</Text>
-              </TouchableOpacity>
-              <Text>{itemNumber}</Text>
-              <TouchableOpacity
-                style={styles.decrimentWrapper}
-                onPress={increment}>
-                <Text>+</Text>
-              </TouchableOpacity>
-            </View>
 
-            <Text style={styles.stcokTxt}>
-              {item.stock ? 'Avalibale in Stock' : 'Not Avalibale in Stock'}
-            </Text>
+      <ScrollView>
+        {/* item images */}
+
+        {item.images.length > 1 ? (
+          <View style={styles.swiperWrapper}>
+            <Swiper
+              dotColor="#ccc"
+              removeClippedSubviews={false}
+              paginationStyle={{bottom: 0}}
+              activeDotColor="#FE9EAC">
+              {item.images.map((img, index) => (
+                <TouchableOpacity
+                  key={index}
+                  activeOpacity={0.6}
+                  onPress={() => setisvisible(true)}>
+                  <Image source={{uri: img}} style={styles.itemImage} />
+                </TouchableOpacity>
+              ))}
+            </Swiper>
           </View>
+        ) : (
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => setisvisible(true)}>
+            <Image source={{uri: item.images[0]}} style={styles.itemImage} />
+          </TouchableOpacity>
+        )}
+
+        {/* item detail */}
+        <View style={styles.itemDetailsWrapper}>
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemBrand}>Brand : {item.brand}</Text>
+          <Text style={styles.itemPrice}>M.R.P : ${item.price}</Text>
+          <Text style={styles.taxtxt}>(incl. of all taxes)</Text>
         </View>
-        <Text style={styles.DescriptionTitle}>Description</Text>
-        <Text style={styles.descriptionSubTitle}>{item.description}</Text>
-
-        <View style={styles.footerWrapper}>
-          <View style={styles.priceWrapper}>
-            <Text style={[styles.itemPrice, {color: '#514EB5'}]}>$</Text>
-            <Text style={styles.itemPrice}>{item.price}</Text>
+        <Text style={styles.quantityTxt}>QUANTITY</Text>
+        <View style={styles.quantityWrapper}>
+          <TouchableOpacity style={styles.commonBox} onPress={decrement}>
+            <Text>-</Text>
+          </TouchableOpacity>
+          <View style={styles.commonBox}>
+            <Text>{itemNumber}</Text>
           </View>
-          <TouchableOpacity activeOpacity={0.6} style={styles.cartWrapper}>
-            <EvilIcons name="cart" color={colors.white} size={width * 0.09} />
-            <Text style={styles.addToCartTxt}>Add to Cart</Text>
+          <TouchableOpacity style={styles.commonBox} onPress={increment}>
+            <Text>+</Text>
           </TouchableOpacity>
         </View>
-      </View>
+        <View style={styles.deliveryWrapper}>
+          <Text style={styles.deliverOptionTxt}>DELIVERY OPTIONS</Text>
+          <View style={styles.locationWrapper}>
+            <Ionicons name={'location-sharp'} size={width * 0.039} />
+            <Text style={styles.deliverydate}>Get it by 12 May - </Text>
+
+            <TouchableOpacity onPress={() => setOpenModal(true)}>
+              <Text
+                style={[
+                  styles.deliverydate,
+                  {textDecorationLine: 'underline'},
+                ]}>
+                {pincode}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.deliveryOfferWrapper}>
+          <View style={styles.deliveryOfferHeader}>
+            <MaterialCommunityIcons
+              name={'truck-delivery-outline'}
+              size={width * 0.037}
+            />
+            <Text style={styles.deliverOfferTxt}>
+              Free Shipping For All Orders Above $20
+            </Text>
+          </View>
+          <View style={styles.deliveryOfferHeader}>
+            <MaterialCommunityIcons
+              name={'find-replace'}
+              size={width * 0.036}
+            />
+            <Text style={styles.deliverOfferTxt}>Easy 15 Days Returns</Text>
+            <TouchableOpacity onPress={retunpolicyscreenHandler}>
+              <Text
+                style={[
+                  styles.deliverOfferTxt,
+                  {color: colors.headerIconColor},
+                ]}>
+                Read More...
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Collapsible title={'Specification'} item={item} />
+        <Collapsible title={'Description'} item={item} />
+      </ScrollView>
     </View>
   );
 };
@@ -98,14 +230,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
-  itemImage: {
-    height: height * 0.4,
-    width: '100%',
-    resizeMode: 'contain',
-    marginTop: height * 0.02,
 
-    // backgroundColor: 'red',
-  },
   productInfoWrapper: {
     marginTop: height * 0.04,
     backgroundColor: colors.white,
@@ -191,11 +316,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   currencyType: {},
-  itemPrice: {
-    fontFamily: fonts.MontserratBold,
-    color: colors.black,
-    fontSize: width * 0.08,
-  },
+
   cartWrapper: {
     backgroundColor: '#514EB7',
     flexDirection: 'row',
@@ -214,5 +335,185 @@ const styles = StyleSheet.create({
     fontSize: width * 0.04,
     fontFamily: fonts.MontserratSemiBold,
     marginTop: height * 0.01,
+  },
+  swiperWrapper: {
+    width: '100%',
+    height: height * 0.8,
+    // backgroundColor: 'red',
+  },
+  itemImage: {
+    height: height * 0.75,
+    width: '100%',
+    resizeMode: 'contain',
+    marginTop: height * 0.02,
+    // backgroundColor:'red'
+
+    // backgroundColor: 'red',
+  },
+  modalswiperWrapper: {
+    width: '100%',
+    height: height * 0.79,
+    // borderRadius:10,
+    // backgroundColor:'red'
+  },
+  modalitemImage: {
+    height: height * 0.7,
+    width: '100%',
+    resizeMode: 'contain',
+  },
+  modalItemWrapper: {
+    flex: 1,
+    // backgroundColor: 'red',
+  },
+  closeModalWrapper: {
+    marginTop: 10,
+    width: width * 0.1,
+    height: height * 0.05,
+    backgroundColor: colors.grey,
+    borderRadius: width / 2,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closemodelTxt: {
+    fontSize: width * 0.04,
+    fontFamily: fonts.MontserratSemiBold,
+  },
+  itemDetailsWrapper: {
+    backgroundColor: '#f4f2f7',
+    paddingHorizontal: width * 0.04,
+    marginTop: height * 0.04,
+    paddingTop: height * 0.01,
+  },
+  itemTitle: {
+    fontSize: width * 0.045,
+    fontFamily: fonts.MontserratSemiBold,
+  },
+  itemBrand: {
+    fontSize: width * 0.042,
+    color: colors.grey,
+    marginVertical: height * 0.01,
+    fontFamily: fonts.MontserratRegular,
+  },
+  itemPrice: {
+    // color:colors.black,
+    fontSize: width * 0.039,
+    fontFamily: fonts.MontserratRegular,
+  },
+  taxtxt: {
+    fontSize: width * 0.036,
+    fontFamily: fonts.MontserratRegular,
+    color: colors.grey,
+  },
+  quantityWrapper: {
+    flexDirection: 'row',
+    paddingHorizontal: width * 0.04,
+    // marginBottom: 100,
+    gap: width * 0.02,
+  },
+  commonBox: {
+    height: height * 0.04,
+    width: width * 0.08,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: width * 0.01,
+  },
+  quantityTxt: {
+    fontFamily: fonts.MontserratRegular,
+    color: colors.black,
+    fontSize: width * 0.036,
+    paddingLeft: width * 0.04,
+    marginVertical: height * 0.02,
+  },
+  deliveryWrapper: {
+    paddingHorizontal: width * 0.04,
+    marginBottom: width * 0.02,
+    marginTop: width * 0.036,
+  },
+  deliverOptionTxt: {
+    fontSize: width * 0.036,
+    color: colors.black,
+    fontFamily: fonts.MontserratRegular,
+    marginBottom: height * 0.015,
+    marginTop: height * 0.01,
+  },
+  deliverydate: {},
+  locationWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: width * 0.01,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: width * 0.9,
+    backgroundColor: colors.white,
+    padding: width * 0.02,
+    borderRadius: width * 0.02,
+    marginBottom: height * 0.02,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: height * 0.03,
+    paddingHorizontal: width * 0.01,
+    paddingTop: height * 0.01,
+  },
+  modalTitle: {
+    fontSize: width * 0.045,
+    color: colors.black,
+    fontFamily: fonts.MontserratSemiBold,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: height * 0.02,
+    marginBottom: height * 0.01,
+    paddingHorizontal: width * 0.01,
+  },
+  inputBox: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: colors.grey,
+    borderRadius: width * 0.02,
+    paddingHorizontal: width * 0.03,
+    paddingVertical: height * 0.01,
+    marginRight: width * 0.02,
+    fontSize: width * 0.034,
+    fontFamily: fonts.MontserratMedium,
+  },
+  applyButton: {
+    backgroundColor: 'black',
+    paddingVertical: height * 0.01,
+    paddingHorizontal: width * 0.03,
+    borderRadius: width * 0.02,
+  },
+  disabledButton: {
+    backgroundColor: colors.btnColor,
+  },
+  applyButtonText: {
+    color: colors.white,
+    fontFamily: fonts.MontserratMedium,
+    fontSize: width * 0.034,
+  },
+  deliveryOfferWrapper: {
+    paddingHorizontal: width * 0.04,
+  },
+  deliveryOfferHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: width * 0.01,
+    paddingVertical: height * 0.01,
+  },
+  deliverOfferTxt: {
+    fontFamily: fonts.MontserratRegular,
+    color: colors.black,
+    fontSize: width * 0.036,
   },
 });

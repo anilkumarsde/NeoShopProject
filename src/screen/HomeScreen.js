@@ -30,7 +30,6 @@ const HomeScreen = () => {
   const [watchData, setwatchData] = useState([]);
   const [womenbag, setwomenbag] = useState([]);
   const [summerData, setSummerData] = useState([]);
-  const [showSummersale, setshowsummersale] = useState(false);
   const [loding, setLoding] = useState(false);
   const navigation = useNavigation();
 
@@ -124,8 +123,7 @@ const HomeScreen = () => {
         }
         profile={require('../utils/images/profile.png')}
       />
-
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* offer slider */}
         <OfferSlider />
 
