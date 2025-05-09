@@ -23,15 +23,21 @@ import Swiper from 'react-native-swiper';
 import Commonscreen from './Commonscreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Collapsible from '../components/Colapsible';
+import {Colapsible2} from '../components/Colapsible2';
+import {addToCart} from '../redux/cartSlice';
+import {useDispatch} from 'react-redux';
+
 const {height, width} = Dimensions.get('window');
 
 const Productdetail = () => {
-  const [itemNumber, setItemNumber] = useState(0);
+  const [itemNumber, setItemNumber] = useState(1);
   const [isvisible, setisvisible] = useState(false);
   const [pincode, setPincode] = useState('12345');
   const [openModal, setOpenModal] = useState(false);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   function retunpolicyscreenHandler() {
     navigation.navigate('Returnpolicyscreen');
   }
@@ -217,8 +223,34 @@ const Productdetail = () => {
           </View>
         </View>
         <Collapsible title={'Specification'} item={item} />
-        <Collapsible title={'Description'} item={item} />
+        <Colapsible2 title={'Description'} item={item} />
       </ScrollView>
+      <View style={styles.addcartWrapper}>
+        <TouchableOpacity style={styles.wishListWrapper}>
+          <EvilIcons name={'heart'} size={width * 0.079} />
+          <Text style={styles.wihslisttxt}>Add to whishlist</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.wishListWrapper,
+            {backgroundColor: colors.headerIconColor},
+          ]}
+          activeOpacity={0.6}
+          onPress={() => {
+            if (itemNumber > 0) {
+              dispatch(addToCart({...item, quantity: itemNumber}));
+              setItemNumber(0); // Reset quantity after adding to cart
+              console.log('Item added to cart');
+            } else {
+              console.log('Please select at least 1 item');
+            }
+          }}>
+          <EvilIcons name={'cart'} size={width * 0.079} color={colors.white} />
+          <Text style={[styles.addtocartText, {color: colors.white}]}>
+            Add to cart
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -229,6 +261,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
+
+    // marginBottom: width * 0.1,
   },
 
   productInfoWrapper: {
@@ -515,5 +549,37 @@ const styles = StyleSheet.create({
     fontFamily: fonts.MontserratRegular,
     color: colors.black,
     fontSize: width * 0.036,
+  },
+  addtocartWrapper: {},
+  addcartWrapper: {
+    paddingHorizontal: width * 0.02,
+    // width:1,
+    // backgroundColor:'red',
+    borderWidth: 1,
+    paddingVertical: height * 0.02,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  wishListWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.04,
+    borderRadius: width * 0.1,
+    borderColor: colors.headerIconColor,
+    width: '47%',
+  },
+  wihslisttxt: {
+    fontFamily: fonts.MontserratRegular,
+    fontSize: width * 0.037,
+    marginTop: height * 0.01,
+  },
+  addtocartText: {
+    fontSize: width * 0.037,
+    fontFamily: fonts.MontserratRegular,
+    marginTop: width * 0.01,
   },
 });

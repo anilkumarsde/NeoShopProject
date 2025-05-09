@@ -19,6 +19,10 @@ const Headercomponent = ({menu, title, search, cart, profile, onpress}) => {
     console.log('navigate to serach screen');
     navigation.navigate('Searchscreen');
   };
+
+  const gotocartscreen = () => {
+    navigation.navigate('Cartscreen');
+  };
   return (
     <View style={styles.container}>
       {/* left wrapper */}
@@ -33,7 +37,7 @@ const Headercomponent = ({menu, title, search, cart, profile, onpress}) => {
         <TouchableOpacity onPress={searchscreenhandler}>
           <Text>{search}</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={gotocartscreen}>
           <Text>{cart}</Text>
         </TouchableOpacity>
         <TouchableOpacity>

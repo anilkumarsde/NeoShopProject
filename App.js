@@ -11,6 +11,9 @@ import Searchscreenproduct from './src/screen/Searchscreenproduct';
 import Commonscreen from './src/screen/Commonscreen';
 import Productdetail from './src/screen/Productdetail';
 import Retunpolicyscreen from './src/screen/Retunpolicyscreen';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+import Cartscreen from './src/screen/Cartscreen';
 
 const App = () => {
   enableScreens();
@@ -18,7 +21,8 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="Swipescreen1" component={Swipescreen1} />
@@ -28,8 +32,12 @@ const App = () => {
         <Stack.Screen name="Commonscreen" component={Commonscreen} />
         <Stack.Screen name="Productdetalsscreen" component={Productdetail} />
         <Stack.Screen name='Returnpolicyscreen' component={Retunpolicyscreen}/>
+        <Stack.Screen name='Cartscreen' component={Cartscreen}/>
       </Stack.Navigator>
     </NavigationContainer>
+
+    </Provider>
+
   );
 };
 

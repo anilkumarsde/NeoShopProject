@@ -9,7 +9,6 @@ import React, {useEffect, useState} from 'react';
 import Headercomponent from '../components/Headercomponent';
 import {colors} from '../utils/colors';
 import StatusBarCom from '../components/StatusBarCom';
-// import CategoryCom from '../components/CategoryCom';
 import OfferSlider from '../components/OfferSlider';
 import ProductList from '../components/ProductList';
 import Banner from '../components/Banner';

@@ -16,10 +16,9 @@ import ColapsibleData from './ColapsibleData';
 
 const {height, width} = Dimensions.get('window');
 
-export default function CustomCollapsible({title, item}) {
-  //   console.log(item, 'item recevied');
-
+export const Colapsible2 = ({title, item}) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  console.log('tirhd', title);
 
   const toggleCollapsed = () => {
     setIsCollapsed(!isCollapsed);
@@ -38,52 +37,14 @@ export default function CustomCollapsible({title, item}) {
         </View>
         <Collapsible collapsed={isCollapsed}>
           <View style={styles.content}>
-            <Text style={[styles.commonTxtstyle, {width: '30%'}]}>
-              Category
-            </Text>
-            <Text style={[styles.commonTxtstyle, {width: '70%'}]}>
-              {' '}
-              :- {item?.category}
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={[styles.commonTxtstyle, {width: '30%'}]}>Brand</Text>
-            <Text style={[styles.commonTxtstyle, {width: '70%'}]}>
-              :- {item?.brand}
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={[styles.commonTxtstyle, {width: '30%'}]}>
-              ProductId
-            </Text>
-            <Text style={[styles.commonTxtstyle, {width: '70%'}]}>
-              :- {item?.sku}
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={[styles.commonTxtstyle, {width: '30%'}]}>Weight</Text>
-            <Text style={[styles.commonTxtstyle, {width: '70%'}]}>
-              :- {item?.weight} gm
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={[styles.commonTxtstyle, {width: '30%'}]}>Width</Text>
-            <Text style={[styles.commonTxtstyle, {width: '70%'}]}>
-              :- {item?.dimensions?.width}cm
-            </Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={[styles.commonTxtstyle, {width: '30%'}]}>Height</Text>
-            <Text style={[styles.commonTxtstyle, {width: '70%'}]}>
-              :- {item?.dimensions?.height}cm
-            </Text>
+            <Text style={styles.commonTxtstyle}>{item.description}</Text>
           </View>
         </Collapsible>
         {/*  */}
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -92,6 +53,7 @@ const styles = StyleSheet.create({
     marginTop: height * 0.03,
     // padding: 20,
     justifyContent: 'center',
+    marginBottom: height * 0.03,
   },
   header: {
     flexDirection: 'row',
