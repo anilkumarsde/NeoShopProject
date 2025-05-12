@@ -19,7 +19,7 @@ const {height, width} = Dimensions.get('window');
 const OfferSlider = () => {
   const navigation = useNavigation();
   const goTocommonScreen = () => {
-    navigation.navigate('Commonscreen', {searchQuery: 'home-decoration'});
+    navigation.navigate('Commonscreen', {searchQuery: "smartphones"});
   };
   return (
     <TouchableOpacity
@@ -33,7 +33,7 @@ const OfferSlider = () => {
         removeClippedSubviews={false}
         // index={0}
         paginationStyle={{bottom: -20}}
-        activeDotColor="#FE9EAC">
+        activeDotColor={colors.headerIconColor}>
         {slidesData.map((item, id) => (
           <View key={id} style={styles.slide}>
             <View style={styles.imageWrapper}>

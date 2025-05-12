@@ -14,11 +14,11 @@ import {fonts} from '../utils/fonts';
 
 const {height, width} = Dimensions.get('window');
 
-const SaleBanner = () => {
+const Watch = () => {
   const navigation = useNavigation();
 
   function gotoCommonscreen() {
-    navigation.navigate('Commonscreen', {searchQuery: 'home-decoration'});
+    navigation.navigate('Commonscreen', {searchQuery:"mens-watches"});
   }
 
   return (
@@ -27,7 +27,7 @@ const SaleBanner = () => {
       activeOpacity={0.9}
       onPress={gotoCommonscreen}>
       <ImageBackground
-        source={require('../utils/images/furniture1.jpg')}
+        source={require('../utils/images/watch.jpg')}
         style={styles.bannerimg}>
         <View style={styles.btnWrapper}>
           <Text style={styles.btnTxt}>Explore more</Text>
@@ -37,7 +37,7 @@ const SaleBanner = () => {
   );
 };
 
-export default SaleBanner;
+export default Watch;
 
 const styles = StyleSheet.create({
   container: {
@@ -67,4 +67,3 @@ const styles = StyleSheet.create({
     fontSize: width * 0.03,
   },
 });
-

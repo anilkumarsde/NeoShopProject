@@ -20,6 +20,8 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useNavigation} from '@react-navigation/native';
 import SaleBanner from '../components/SaleBanner';
+import Dealoftheday from '../components/Dealoftheday';
+import Watch from '../components/Watch';
 
 const {width, height} = Dimensions.get('window');
 
@@ -123,41 +125,17 @@ const HomeScreen = () => {
         profile={require('../utils/images/profile.png')}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* offer slider */}
         <OfferSlider />
 
-        {/* product list  */}
-
-        {loding ? (
-          <View style={styles.loderWrapper}>
-            <ActivityIndicator size={'large'} color={colors.black} />
-          </View>
-        ) : (
-          <ProductList productdata={productdata} />
-        )}
-
-        {/* sales banner */}
         <SaleBanner />
 
-        {loding ? (
-          <View style={styles.loderWrapper}>
-            <ActivityIndicator size={'large'} color={colors.black} />
-          </View>
-        ) : (
-          <ProductList productdata={smartPhonedata} />
-        )}
+        <Dealoftheday />
 
-        {/* TrendingProducts */}
-
-        <TrendingProducts />
-
-        <ProductList productdata={watchData} />
+        <Watch/>
         {/*Top  Women shoes  */}
         <Banner />
-        <ProductList productdata={womenbag} />
         {/*summer special banner*/}
         <Summerspecial />
-        <ProductList productdata={summerData} />
       </ScrollView>
     </View>
   );
@@ -169,6 +147,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9F9F9',
+    paddingBottom:height*0.02
     // paddingHorizontal: width * 0.05,
   },
   loderWrapper: {
