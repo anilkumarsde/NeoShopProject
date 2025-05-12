@@ -22,6 +22,8 @@ import {useNavigation} from '@react-navigation/native';
 import SaleBanner from '../components/SaleBanner';
 import Dealoftheday from '../components/Dealoftheday';
 import Watch from '../components/Watch';
+import Smartphone from '../components/Smartphone';
+import Gadget from '../components/Gadget';
 
 const {width, height} = Dimensions.get('window');
 
@@ -131,10 +133,20 @@ const HomeScreen = () => {
 
         <Dealoftheday />
 
-        <Watch/>
+        <Watch />
+
+
+        <Gadget/>
+
         {/*Top  Women shoes  */}
+
         <Banner />
+
+        <Smartphone/>
+
+
         {/*summer special banner*/}
+
         <Summerspecial />
       </ScrollView>
     </View>
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9F9F9',
-    paddingBottom:height*0.02
+    paddingBottom: height * 0.02,
     // paddingHorizontal: width * 0.05,
   },
   loderWrapper: {
