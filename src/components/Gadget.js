@@ -14,11 +14,11 @@ import {fonts} from '../utils/fonts';
 
 const {height, width} = Dimensions.get('window');
 
-const Watch = () => {
+const Gadget = () => {
   const navigation = useNavigation();
 
   function gotoCommonscreen() {
-    navigation.navigate('Commonscreen', {searchQuery: 'mobile-accessories'});
+    navigation.navigate('Commonscreen', {searchQuery:"mobile-accessories"});
   }
 
   return (
@@ -37,7 +37,7 @@ const Watch = () => {
   );
 };
 
-export default Watch;
+export default Gadget;
 
 const styles = StyleSheet.create({
   container: {
@@ -54,12 +54,9 @@ const styles = StyleSheet.create({
   btnWrapper: {
     backgroundColor: colors.headerIconColor,
     width: '32%',
-    alignSelf: 'flex-end',
-    // position: 'absolute',
-    // right: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: width * 0.02,
+    marginLeft: width * 0.02,
     borderRadius: width * 0.05,
     paddingVertical: height * 0.01,
     marginTop: width * 0.22,

@@ -18,7 +18,7 @@ const Bike = () => {
   const navigation = useNavigation();
 
   function gotoCommonscreen() {
-    navigation.navigate('Commonscreen', {searchQuery: "motorcycle"});
+    navigation.navigate('Commonscreen', {searchQuery:"mens-watches"});
   }
 
   return (
@@ -54,12 +54,9 @@ const styles = StyleSheet.create({
   btnWrapper: {
     backgroundColor: colors.headerIconColor,
     width: '32%',
-    alignSelf: 'flex-end',
-    // position: 'absolute',
-    // right: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: width * 0.02,
+    marginLeft: width * 0.02,
     borderRadius: width * 0.05,
     paddingVertical: height * 0.01,
     marginTop: width * 0.22,
