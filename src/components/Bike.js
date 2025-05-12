@@ -14,11 +14,11 @@ import {fonts} from '../utils/fonts';
 
 const {height, width} = Dimensions.get('window');
 
-const Watch = () => {
+const Bike = () => {
   const navigation = useNavigation();
 
   function gotoCommonscreen() {
-    navigation.navigate('Commonscreen', {searchQuery: "smartphones"});
+    navigation.navigate('Commonscreen', {searchQuery: "motorcycle"});
   }
 
   return (
@@ -27,7 +27,7 @@ const Watch = () => {
       activeOpacity={0.9}
       onPress={gotoCommonscreen}>
       <ImageBackground
-        source={require('../utils/images/smartphone2.jpg')}
+        source={require('../utils/images/motocycle.jpg')}
         style={styles.bannerimg}>
         <View style={styles.btnWrapper}>
           <Text style={styles.btnTxt}>Explore more</Text>
@@ -37,7 +37,7 @@ const Watch = () => {
   );
 };
 
-export default Watch;
+export default Bike;
 
 const styles = StyleSheet.create({
   container: {
@@ -48,15 +48,18 @@ const styles = StyleSheet.create({
   bannerimg: {
     height: height * 0.2,
     width: '100%',
-    resizeMode: 'contain',
+    resizeMode: 'stretch',
     justifyContent: 'center',
   },
   btnWrapper: {
     backgroundColor: colors.headerIconColor,
     width: '32%',
+    alignSelf: 'flex-end',
+    // position: 'absolute',
+    // right: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: width * 0.02,
+    marginRight: width * 0.02,
     borderRadius: width * 0.05,
     paddingVertical: height * 0.01,
     marginTop: width * 0.22,

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: height * 0.03,
     // padding: 20,
     justifyContent: 'center',
-    marginBottom: height * 0.03,
+    // marginBottom: height * 0.03,
   },
   header: {
     flexDirection: 'row',

@@ -24,6 +24,7 @@ import Dealoftheday from '../components/Dealoftheday';
 import Watch from '../components/Watch';
 import Smartphone from '../components/Smartphone';
 import Gadget from '../components/Gadget';
+import Bike from '../components/Bike';
 
 const {width, height} = Dimensions.get('window');
 
@@ -42,54 +43,54 @@ const HomeScreen = () => {
   };
 
   //   api call for product data
-  useEffect(() => {
-    const getAllData = async () => {
-      try {
-        setLoding(true);
-        // Fetch all data in parallel
-        const [smartphoneRes, watchRes, bagRes] = await Promise.all([
-          axios.get('https://dummyjson.com/products/category/smartphones'),
-          axios.get('https://dummyjson.com/products/category/mens-watches'),
-          axios.get('https://dummyjson.com/products/category/womens-bags'),
-        ]);
+  // useEffect(() => {
+  //   const getAllData = async () => {
+  //     try {
+  //       setLoding(true);
+  //       // Fetch all data in parallel
+  //       const [smartphoneRes, watchRes, bagRes] = await Promise.all([
+  //         axios.get('https://dummyjson.com/products/category/smartphones'),
+  //         axios.get('https://dummyjson.com/products/category/mens-watches'),
+  //         axios.get('https://dummyjson.com/products/category/womens-bags'),
+  //       ]);
 
-        // Update individual categories
-        setsmartPhonedata(smartphoneRes.data.products);
-        setwatchData(watchRes.data.products);
-        setwomenbag(bagRes.data.products);
+  //       // Update individual categories
+  //       setsmartPhonedata(smartphoneRes.data.products);
+  //       setwatchData(watchRes.data.products);
+  //       setwomenbag(bagRes.data.products);
 
-        // Merge them into summerData
-        const combined = [
-          ...smartphoneRes.data.products,
-          ...watchRes.data.products,
-          ...bagRes.data.products,
-        ];
-        setSummerData(combined);
+  //       // Merge them into summerData
+  //       const combined = [
+  //         ...smartphoneRes.data.products,
+  //         ...watchRes.data.products,
+  //         ...bagRes.data.products,
+  //       ];
+  //       setSummerData(combined);
 
-        // console.log('summerData:', combined);
-      } catch (error) {
-        console.log('something went wrong in summer data fetch', error);
-      } finally {
-        setLoding(false);
-      }
-    };
+  //       // console.log('summerData:', combined);
+  //     } catch (error) {
+  //       console.log('something went wrong in summer data fetch', error);
+  //     } finally {
+  //       setLoding(false);
+  //     }
+  //   };
 
-    const getProductData = async () => {
-      try {
-        setLoding(true);
-        const response = await axios.get('https://dummyjson.com/products');
-        setproductdata(response.data.products);
-        // console.log('all product data fetched');
-      } catch (error) {
-        console.log('something went wrong in product data fetch', error);
-      } finally {
-        setLoding(true);
-      }
-    };
+  //   const getProductData = async () => {
+  //     try {
+  //       setLoding(true);
+  //       const response = await axios.get('https://dummyjson.com/products');
+  //       setproductdata(response.data.products);
+  //       // console.log('all product data fetched');
+  //     } catch (error) {
+  //       console.log('something went wrong in product data fetch', error);
+  //     } finally {
+  //       setLoding(true);
+  //     }
+  //   };
 
-    getProductData();
-    getAllData();
-  }, []);
+  //   getProductData();
+  //   getAllData();
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -140,9 +141,11 @@ const HomeScreen = () => {
 
         {/*Top  Women shoes  */}
 
-        <Banner />
+        {/* <Banner /> */}
 
         <Smartphone/>
+
+        <Bike/>
 
 
         {/*summer special banner*/}

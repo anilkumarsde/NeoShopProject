@@ -26,6 +26,8 @@ import Collapsible from '../components/Colapsible';
 import {Colapsible2} from '../components/Colapsible2';
 import {addToCart} from '../redux/cartSlice';
 import {useDispatch} from 'react-redux';
+import TrendingProducts from '../components/TrendingProducts';
+import ProductList from '../components/ProductList';
 
 const {height, width} = Dimensions.get('window');
 
@@ -54,7 +56,9 @@ const Productdetail = () => {
   }
 
   const route = useRoute();
-  const {item} = route.params;
+  const {item, searchData} = route.params;
+  console.log('Received search data:', searchData);
+
   return (
     <View style={styles.container}>
       <View>
@@ -178,6 +182,7 @@ const Productdetail = () => {
             <Text>+</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.deliveryWrapper}>
           <Text style={styles.deliverOptionTxt}>DELIVERY OPTIONS</Text>
           <View style={styles.locationWrapper}>
@@ -224,6 +229,10 @@ const Productdetail = () => {
         </View>
         <Collapsible title={'Specification'} item={item} />
         <Colapsible2 title={'Description'} item={item} />
+
+        <ProductList productdata={searchData} />
+
+        {/* <ProductList productdata={item}/> */}
       </ScrollView>
       <View style={styles.addcartWrapper}>
         <TouchableOpacity style={styles.wishListWrapper}>

@@ -15,17 +15,22 @@ import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
-const RenderItem = ({item}) => {
+const RenderItem = ({item, searchData}) => {
   const navigation = useNavigation();
   const originalPrice = (
     item.price /
     (1 - item.discountPercentage / 100)
   ).toFixed(2);
 
+  const gotoProductdetail = (item, searchData) => {
+    navigation.navigate('Productdetalsscreen', {item, searchData: searchData});
+    console.log('Moved to product detail screen');
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => productsdetalsscreenHandler(item, navigation)}>
+      onPress={() => gotoProductdetail(item, searchData)}>
       <Image source={{uri: item.images[0]}} style={styles.itemImg} />
       <View style={styles.infoWrapper}>
         <Text style={styles.itemTitle} numberOfLines={1}>

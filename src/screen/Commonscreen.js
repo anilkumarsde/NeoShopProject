@@ -164,7 +164,7 @@ const Commonscreen = () => {
           <FlatList
             data={searchData}
             keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => <RenderItem item={item} />}
+            renderItem={({item}) => <RenderItem item={item} searchData={searchData} />}
             numColumns={2}
             showsVerticalScrollIndicator={false}
           />

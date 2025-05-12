@@ -38,11 +38,20 @@ const ProductList = ({productdata}) => {
   //   console.log('djfaslfja', item);
   // }
 
+  const gotoproductdetal=(item,searchData)=>{
+    // Example of navigating to Productdetail screen
+navigation.replace('Productdetalsscreen', {
+  item: item,
+  searchData: productdata, // Make sure this is an array
+});
+
+  }
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         style={styles.productlistWrapper}
-        onPress={() => productsdetalsscreenHandler(item, navigation)}>
+        onPress={() => gotoproductdetal(item,productdata)}>
         <Image source={{uri: item?.images[0]}} style={styles.itemImage} />
 
         <Text style={styles.itemTitle} numberOfLines={1}>
@@ -92,7 +101,8 @@ export default ProductList;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: width * 0.04,
-    marginTop: height * 0.04,
+    marginVertical: height * 0.04,
+
     // width:'100%'
   },
   productlistWrapper: {
