@@ -38,20 +38,19 @@ const ProductList = ({productdata}) => {
   //   console.log('djfaslfja', item);
   // }
 
-  const gotoproductdetal=(item,searchData)=>{
+  const gotoproductdetal = (item, searchData) => {
     // Example of navigating to Productdetail screen
-navigation.replace('Productdetalsscreen', {
-  item: item,
-  searchData: productdata, // Make sure this is an array
-});
-
-  }
+    navigation.replace('Productdetalsscreen', {
+      item: item,
+      searchData: productdata, // Make sure this is an array
+    });
+  };
 
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         style={styles.productlistWrapper}
-        onPress={() => gotoproductdetal(item,productdata)}>
+        onPress={() => gotoproductdetal(item, productdata)}>
         <Image source={{uri: item?.images[0]}} style={styles.itemImage} />
 
         <Text style={styles.itemTitle} numberOfLines={1}>

@@ -25,6 +25,7 @@ import Watch from '../components/Watch';
 import Smartphone from '../components/Smartphone';
 import Gadget from '../components/Gadget';
 import Bike from '../components/Bike';
+import Car from '../components/Car';
 
 const {width, height} = Dimensions.get('window');
 
@@ -146,6 +147,8 @@ const HomeScreen = () => {
         <Smartphone/>
 
         <Bike/>
+
+        <Car/>
 
 
         {/*summer special banner*/}
