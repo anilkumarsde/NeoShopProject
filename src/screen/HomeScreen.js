@@ -137,19 +137,17 @@ const HomeScreen = () => {
 
         <Watch />
 
-
-        <Gadget/>
+        <Gadget />
 
         {/*Top  Women shoes  */}
 
         {/* <Banner /> */}
 
-        <Smartphone/>
+        <Smartphone />
 
-        <Bike/>
+        <Bike />
 
-        <Car/>
-
+        <Car />
 
         {/*summer special banner*/}
 

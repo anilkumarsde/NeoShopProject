@@ -230,6 +230,9 @@ const Productdetail = () => {
         <Collapsible title={'Specification'} item={item} />
         <Colapsible2 title={'Description'} item={item} />
 
+
+        <Text style={styles.similarProductText}>Similar Products</Text>
+
         <ProductList productdata={searchData} />
 
         {/* <ProductList productdata={item}/> */}
@@ -591,4 +594,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.MontserratRegular,
     marginTop: width * 0.01,
   },
+  similarProductText:{
+       paddingHorizontal:width*0.04,
+       marginTop:height*0.03,
+       fontSize:width*0.042,
+       color:colors.black,
+       fontFamily:fonts.MontserratMedium
+  }
 });

@@ -33,7 +33,13 @@ const LoginScreen = () => {
         password,
       });
       const token = respone.data.accessToken;
+      const userName = respone.data.username;
+      const email = respone.data.email;
+      const image = respone.data.image;
       await AsyncStorage.setItem('authToken', token);
+      await AsyncStorage.setItem('Username', userName);
+      await AsyncStorage.setItem('Email', email);
+      await AsyncStorage.setItem('Image', image);
       console.log('user logedin', token);
       setpassword('');
       setusername('');

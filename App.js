@@ -11,9 +11,10 @@ import Searchscreenproduct from './src/screen/Searchscreenproduct';
 import Commonscreen from './src/screen/Commonscreen';
 import Productdetail from './src/screen/Productdetail';
 import Retunpolicyscreen from './src/screen/Retunpolicyscreen';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import Cartscreen from './src/screen/Cartscreen';
+import ProfileScreen from './src/screen/ProfileScreen';
 
 const App = () => {
   enableScreens();
@@ -23,21 +24,23 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Swipescreen1" component={Swipescreen1} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="Drawer" component={DrawerNavigator} />
-        <Stack.Screen name="Searchscreen" component={Searchscreenproduct} />
-        <Stack.Screen name="Commonscreen" component={Commonscreen} />
-        <Stack.Screen name="Productdetalsscreen" component={Productdetail} />
-        <Stack.Screen name='Returnpolicyscreen' component={Retunpolicyscreen}/>
-        <Stack.Screen name='Cartscreen' component={Cartscreen}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen name="Swipescreen1" component={Swipescreen1} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="Drawer" component={DrawerNavigator} />
+          <Stack.Screen name="Searchscreen" component={Searchscreenproduct} />
+          <Stack.Screen name="Commonscreen" component={Commonscreen} />
+          <Stack.Screen name="Productdetalsscreen" component={Productdetail} />
+          <Stack.Screen
+            name="Returnpolicyscreen"
+            component={Retunpolicyscreen}
+          />
+          <Stack.Screen name="Cartscreen" component={Cartscreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
-
   );
 };
 

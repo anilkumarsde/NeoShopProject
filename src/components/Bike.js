@@ -18,7 +18,7 @@ const Bike = () => {
   const navigation = useNavigation();
 
   function gotoCommonscreen() {
-    navigation.navigate('Commonscreen', {searchQuery:"mens-watches"});
+    navigation.navigate('Commonscreen', {searchQuery:"motorcycle"});
   }
 
   return (
