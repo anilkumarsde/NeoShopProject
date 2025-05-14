@@ -78,7 +78,8 @@ const Productdetail = () => {
                 dotColor="#ccc"
                 removeClippedSubviews={false}
                 paginationStyle={{bottom: -1}}
-                activeDotColor="#FE9EAC">
+                activeDotColor={colors.headerIconColor}
+                activeDotStyle={{width:width*0.05}}>
                 {item.images.map((img, index) => (
                   <TouchableOpacity key={index} activeOpacity={0.6}>
                     <Image source={{uri: img}} style={styles.modalitemImage} />
@@ -147,7 +148,8 @@ const Productdetail = () => {
               dotColor="#ccc"
               removeClippedSubviews={false}
               paginationStyle={{bottom: 0}}
-              activeDotColor="#FE9EAC">
+              activeDotStyle={{width:width*0.05}}
+              activeDotColor={colors.headerIconColor}>
               {item.images.map((img, index) => (
                 <TouchableOpacity
                   key={index}

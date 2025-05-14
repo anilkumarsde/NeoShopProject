@@ -7,7 +7,6 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
-  ScrollView,
 } from 'react-native';
 import {colors} from '../utils/colors';
 import StatusBarCom from '../components/StatusBarCom';

@@ -1,23 +1,23 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-
-
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {colors} from '../utils/colors';
 
 const Newarival = () => {
-  const navigation=useNavigation();
-  useEffect(()=>{
-
-    navigation.navigate('Commonscreen',{searchQuery:'smartphones'})
-
-  },[])
   return (
-    <View>
-      <Text>Newarival</Text>
+    <View style={styles.container}>
+      <StatusBar
+        backgraoundcolor={colors.backgroundColor}
+        barStyle={'dark-content'}
+      />
     </View>
   );
 };
 
 export default Newarival;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
+  },
+});
