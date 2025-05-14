@@ -9,13 +9,13 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {FantasticFind} from '../utils/FantasticFind';
+import {ElectronicsData} from '../utils/ElectronicsData';
 import {colors} from '../utils/colors';
 import {fonts} from '../utils/fonts';
 
 const {width, height} = Dimensions.get('window');
 
-const FantasticFindComponent = () => {
+const ElectronicsList = () => {
   const navigation = useNavigation();
 
   // Function to navigate based on ID
@@ -23,22 +23,25 @@ const FantasticFindComponent = () => {
     let searchQuery = '';
     switch (id) {
       case 1:
-        searchQuery = 'mens-shirts';
+        searchQuery = 'laptops';
         break;
       case 2:
-        searchQuery = 'mens-shoes';
+        searchQuery = 'mobile-accessories';
         break;
       case 3:
-        searchQuery = 'sunglasses';
+        searchQuery = 'tablets';
         break;
       case 4:
-        searchQuery = 'womens-dresses';
+        searchQuery = 'smartphones';
         break;
       case 5:
-        searchQuery = 'womens-watches';
+        searchQuery = 'televisions';
+        break;
+      case 6:
+        searchQuery = 'speakers';
         break;
       default:
-        searchQuery = 'products';
+        searchQuery = 'electronics';
     }
     navigation.navigate('Commonscreen', {searchQuery});
   };
@@ -46,17 +49,16 @@ const FantasticFindComponent = () => {
   return (
     <View style={styles.container}>
       {/* Section Title */}
-      <Text style={styles.title}>Fantastic Finds</Text>
+      <Text style={styles.title}>Electronics</Text>
 
       {/* Horizontal FlatList */}
       <FlatList
-        data={FantasticFind}
+        data={ElectronicsData}
         keyExtractor={item => item.id.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => (
           <TouchableOpacity
-            activeOpacity={0.5}
             style={styles.card}
             onPress={() => goToCommonScreen(item.id)}>
             <Image source={item.image} style={styles.image} />
@@ -67,7 +69,7 @@ const FantasticFindComponent = () => {
   );
 };
 
-export default FantasticFindComponent;
+export default ElectronicsList;
 
 const styles = StyleSheet.create({
   container: {

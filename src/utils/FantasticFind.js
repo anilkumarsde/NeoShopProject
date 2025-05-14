@@ -9,7 +9,7 @@ export const FantasticFind = [
   },
   {
     id: 3,
-    image: require('../utils/images/sunglasses.jpg'),
+    image: require('../utils/images/sunglass2.jpg'),
   },
   {
     id: 4,
@@ -17,6 +17,6 @@ export const FantasticFind = [
   },
   {
     id: 5,
-    image: require('../utils/images/ipad.jpg'),
+    image: require('../utils/images/womenwatch.jpg'),
   },
 ];

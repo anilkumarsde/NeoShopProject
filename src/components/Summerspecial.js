@@ -19,7 +19,7 @@ const Summerspecial = () => {
   const gotoCommonscreen = () => {
     console.log('moved to common screen', showSummersale);
     navigation.navigate('Commonscreen', {
-      searchQuery: 'womens-bags',
+      searchQuery: 'beauty',
     });
   };
   return (

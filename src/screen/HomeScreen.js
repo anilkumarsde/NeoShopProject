@@ -26,8 +26,10 @@ import Smartphone from '../components/Smartphone';
 import Gadget from '../components/Gadget';
 import Bike from '../components/Bike';
 import Car from '../components/Car';
-import { FantasticFind } from '../utils/FantasticFind';
+import {FantasticFind} from '../utils/FantasticFind';
 import FantasticFindComponent from '../components/FantasticFindComponent';
+import ElectronicsList from '../components/ElectronicsList';
+import CategoryCom from '../components/CategoryCom';
 
 const {width, height} = Dimensions.get('window');
 
@@ -131,6 +133,7 @@ const HomeScreen = () => {
         profile={require('../utils/images/profile.png')}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <CategoryCom/> */}
         <OfferSlider />
 
         {/* <SaleBanner /> */}
@@ -145,18 +148,13 @@ const HomeScreen = () => {
         <ProductList productdata={summerData} title={'Deals of the Days'} />
 
         <Watch />
-        <FantasticFindComponent/>
-
-
-        <Gadget />
-
-        {/*Top  Women shoes  */}
-
-        {/* <Banner /> */}
-
-        <Smartphone />
+        <FantasticFindComponent />
 
         <Bike />
+
+        <ElectronicsList />
+
+        {/* <Gadget /> */}
 
         <Car />
 
