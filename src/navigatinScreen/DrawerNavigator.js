@@ -12,21 +12,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Entypo from 'react-native-vector-icons/Entypo';
 import {StackActions} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Men from '../screen/Men';
-import Women from '../screen/Women';
+import Customerspport from '../screen/Customerspport';
+import About from '../screen/About';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {height, width} = Dimensions.get('window');
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
-
-const Hometab = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Men" component={Men} />
-      <Stack.Screen name="Women" component={Women} />
-    </Stack.Navigator>
-  );
-};
 
 const DrawerNavigator = () => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -74,7 +66,59 @@ const DrawerNavigator = () => {
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons
-              name="home"
+              name="microsoft-onenote"
+              size={width * 0.06}
+              color={colors.headerIconColor}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Shop By Category"
+        component={Shopbycategory}
+        options={{
+          drawerIcon: () => (
+            <MaterialCommunityIcons
+              name="widgets-outline"
+              size={width * 0.06}
+              color={colors.headerIconColor}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="New Arrivals"
+        component={Newarival}
+        options={{
+          drawerIcon: () => (
+            <Entypo
+              name="new"
+              size={width * 0.06}
+              color={colors.headerIconColor}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Customer Support"
+        component={Customerspport}
+        options={{
+          drawerIcon: () => (
+            <AntDesign
+              name="customerservice"
+              size={width * 0.06}
+              color={colors.headerIconColor}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="About NeoShop"
+        component={About}
+        options={{
+          drawerIcon: () => (
+            <MaterialCommunityIcons
+              name="scan-helper"
               size={width * 0.06}
               color={colors.headerIconColor}
             />

@@ -12,28 +12,33 @@ import {fonts} from '../utils/fonts';
 import {colors} from '../utils/colors';
 import {useNavigation} from '@react-navigation/native';
 const {width, height} = Dimensions.get('window');
-const Detailproductheader = () => {
+const Detailproductheader = ({title}) => {
   const navigation = useNavigation();
 
-
   function gobackScreenHandler() {
-    navigation.goBack();
+    navigation.navigate('Drawer');
   }
 
-  function gotoCartscreen()
-  {
-    navigation.navigate('Cartscreen')
+  function gotoCartscreen() {
+    navigation.navigate('Cartscreen');
   }
-
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={gobackScreenHandler}>
-        <MaterialIcons name="arrow-back-ios" size={width * 0.05} />
+        <MaterialIcons
+          name="arrow-back-ios"
+          size={width * 0.05}
+          color={colors.headerIconColor}
+        />
       </TouchableOpacity>
-      <Text style={styles.title}>Detail Product</Text>
+      <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={gotoCartscreen}>
-        <EvilIcons name="cart" size={width * 0.065} />
+        <EvilIcons
+          name="cart"
+          size={width * 0.065}
+          color={colors.headerIconColor}
+        />
       </TouchableOpacity>
       {/*  */}
     </View>
@@ -49,11 +54,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: height * 0.01,
     paddingHorizontal: width * 0.04,
-
   },
   title: {
     fontFamily: fonts.MontserratMedium,
-    color: colors.black,
+    color: colors.headerIconColor,
     fontSize: width * 0.039,
   },
 });

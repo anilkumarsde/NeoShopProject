@@ -85,11 +85,11 @@ const CustomDrawer = props => {
       <DrawerItemList {...props} />
 
       {/* Logout Button */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.logoutButton}
         onPress={() => alert('Logging out...')}>
         <Text style={styles.logoutText}>Logout</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </DrawerContentScrollView>
   );
 };

@@ -53,6 +53,7 @@ export default Headercomponent;
 const styles = StyleSheet.create({
   container: {
     marginTop: height * 0.02,
+    marginBottom:height*0.02,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

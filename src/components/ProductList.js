@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
-const ProductList = ({productdata}) => {
+const ProductList = ({productdata,title}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef(null);
   const navigation = useNavigation();
@@ -83,6 +83,9 @@ const ProductList = ({productdata}) => {
       <TouchableOpacity style={styles.scrollBtn} onPress={scrollToNextItem}>
         <AntDesign name="right" size={15} />
       </TouchableOpacity>
+      <View style={styles.headerWrapper}>
+        <Text style={styles.headerTxt}>{title}</Text>
+      </View>
       <FlatList
         data={productdata}
         keyExtractor={item => item.id}
@@ -100,9 +103,17 @@ export default ProductList;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: width * 0.04,
-    marginVertical: height * 0.04,
+    marginTop: height * 0.05,
 
     // width:'100%'
+  },
+  headerWrapper: {
+    marginBottom: height * 0.02,
+  },
+  headerTxt: {
+    fontSize:width*0.04,
+    color:colors.headerIconColor,
+    fontFamily:fonts.MontserratBold
   },
   productlistWrapper: {
     // backgroundColor: 'red',
