@@ -14,15 +14,12 @@ import {useNavigation} from '@react-navigation/native';
 const {width, height} = Dimensions.get('window');
 const Detailproductheader = ({title}) => {
   const navigation = useNavigation();
-
   function gobackScreenHandler() {
-    navigation.navigate('Drawer');
+    navigation.replace('Drawer');
   }
-
   function gotoCartscreen() {
     navigation.navigate('Cartscreen');
   }
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={gobackScreenHandler}>

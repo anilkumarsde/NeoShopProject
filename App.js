@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer>f
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="Swipescreen1" component={Swipescreen1} />

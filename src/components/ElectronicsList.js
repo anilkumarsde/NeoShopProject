@@ -60,6 +60,7 @@ const ElectronicsList = () => {
         renderItem={({item}) => (
           <TouchableOpacity
             style={styles.card}
+            activeOpacity={0.5}
             onPress={() => goToCommonScreen(item.id)}>
             <Image source={item.image} style={styles.image} />
           </TouchableOpacity>

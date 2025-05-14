@@ -133,7 +133,10 @@ const Productdetail = () => {
         barStyle={'dark-content'}
       />
       {/* header */}
-      <Detailproductheader title={'Product Detail'} />
+      <Detailproductheader
+        title={'Product Detail'}
+        // onPress={() => navigation.goBack()}
+      />
 
       <ScrollView>
         {/* item images */}

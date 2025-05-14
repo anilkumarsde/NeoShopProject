@@ -15,6 +15,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Customerspport from '../screen/Customerspport';
 import About from '../screen/About';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Servie from '../screen/Servie';
 
 const {height, width} = Dimensions.get('window');
 const Drawer = createDrawerNavigator();
@@ -106,6 +107,20 @@ const DrawerNavigator = () => {
           drawerIcon: () => (
             <AntDesign
               name="customerservice"
+              size={width * 0.06}
+              color={colors.headerIconColor}
+            />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name="Services"
+        component={Servie}
+        options={{
+          drawerIcon: () => (
+            <AntDesign
+              name="setting"
               size={width * 0.06}
               color={colors.headerIconColor}
             />
