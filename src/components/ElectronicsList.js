@@ -7,6 +7,7 @@ import {
   Text,
   StyleSheet,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ElectronicsData} from '../utils/ElectronicsData';
@@ -62,7 +63,9 @@ const ElectronicsList = () => {
             style={styles.card}
             activeOpacity={0.5}
             onPress={() => goToCommonScreen(item.id)}>
-            <Image source={item.image} style={styles.image} />
+            <ImageBackground source={item.image} style={styles.image} >
+              <Text style={styles.itemTitle}>{item.title}</Text>
+            </ImageBackground>
           </TouchableOpacity>
         )}
       />
@@ -96,4 +99,11 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
+  itemTitle:{
+    fontFamily:fonts.MontserratMedium,
+    color:colors.headerIconColor,
+    fontSize:width*0.034,
+    paddingLeft:width*0.01,
+    paddingTop:height*0.01
+  }
 });

@@ -7,6 +7,7 @@ import {
   Text,
   StyleSheet,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FantasticFind} from '../utils/FantasticFind';
@@ -59,7 +60,9 @@ const FantasticFindComponent = () => {
             activeOpacity={0.5}
             style={styles.card}
             onPress={() => goToCommonScreen(item.id)}>
-            <Image source={item.image} style={styles.image} />
+            <ImageBackground source={item.image} style={styles.image}>
+              <Text style={styles.itemTitle}>{item.title}</Text>
+            </ImageBackground>
           </TouchableOpacity>
         )}
       />
@@ -92,5 +95,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
+    // justifyContent:'flex-end',
+    // paddingBottom:10
+  },
+  itemTitle: {
+    // alignSelf:'baseline's
+    paddingTop: height * 0.01,
+    paddingLeft: width * 0.03,
+    color: colors.headerIconColor,
+    fontFamily: fonts.MontserratMedium,
+    fontSize: width * 0.034,
   },
 });

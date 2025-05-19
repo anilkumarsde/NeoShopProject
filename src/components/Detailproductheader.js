@@ -12,7 +12,7 @@ import {fonts} from '../utils/fonts';
 import {colors} from '../utils/colors';
 import {useNavigation} from '@react-navigation/native';
 const {width, height} = Dimensions.get('window');
-const Detailproductheader = ({title}) => {
+const Detailproductheader = ({title, icon}) => {
   const navigation = useNavigation();
   function gobackScreenHandler() {
     navigation.replace('Drawer');
@@ -31,11 +31,7 @@ const Detailproductheader = ({title}) => {
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={gotoCartscreen}>
-        <EvilIcons
-          name="cart"
-          size={width * 0.065}
-          color={colors.headerIconColor}
-        />
+        <Text>{icon}</Text>
       </TouchableOpacity>
       {/*  */}
     </View>

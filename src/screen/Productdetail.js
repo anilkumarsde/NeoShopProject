@@ -1,4 +1,5 @@
 import {
+  Alert,
   Dimensions,
   Image,
   Modal,
@@ -10,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import StatusBarCom from '../components/StatusBarCom';
 import {colors} from '../utils/colors';
@@ -28,6 +29,7 @@ import {addToCart} from '../redux/cartSlice';
 import {useDispatch} from 'react-redux';
 import TrendingProducts from '../components/TrendingProducts';
 import ProductList from '../components/ProductList';
+import Toast from 'react-native-simple-toast';
 
 const {height, width} = Dimensions.get('window');
 
@@ -36,6 +38,7 @@ const Productdetail = () => {
   const [isvisible, setisvisible] = useState(false);
   const [pincode, setPincode] = useState('12345');
   const [openModal, setOpenModal] = useState(false);
+  const [isadditem, setisadditem] = useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -55,9 +58,35 @@ const Productdetail = () => {
     setItemNumber(pre => pre + 1);
   }
 
+  function gotocart() {
+    navigation.navigate('Cartscreen');
+    console.log('navigate to carscreen');
+    setisadditem(false);
+  }
+  // function showToast() {
+  //   Toast.show({
+  //     type: 'success',
+  //     text1: 'Item added to cart',
+  //     text2: 'You can view it in your cart.',
+  //     position: 'bottom',
+  //     visibilityTime: 3000, // duration
+  //     autoHide: true,
+  //     topOffset: 40,
+  //   });
+  // }
+
+  function addTocartitem() {
+    dispatch(addToCart({...item, quantity: itemNumber}));
+    setItemNumber(1);
+    setisadditem(true);
+    Toast.show('Item added to cart', Toast.LONG);
+
+    // showToast();
+  }
+
   const route = useRoute();
   const {item, searchData} = route.params;
-  console.log('Received search data:', searchData);
+  // console.log('Received search data:', searchData);
 
   return (
     <View style={styles.container}>
@@ -79,7 +108,7 @@ const Productdetail = () => {
                 removeClippedSubviews={false}
                 paginationStyle={{bottom: -1}}
                 activeDotColor={colors.headerIconColor}
-                activeDotStyle={{width:width*0.05}}>
+                activeDotStyle={{width: width * 0.05}}>
                 {item.images.map((img, index) => (
                   <TouchableOpacity key={index} activeOpacity={0.6}>
                     <Image source={{uri: img}} style={styles.modalitemImage} />
@@ -136,6 +165,13 @@ const Productdetail = () => {
       {/* header */}
       <Detailproductheader
         title={'Product Detail'}
+        icon={
+          <EvilIcons
+            name="cart"
+            size={width * 0.065}
+            color={colors.headerIconColor}
+          />
+        }
         // onPress={() => navigation.goBack()}
       />
 
@@ -148,7 +184,7 @@ const Productdetail = () => {
               dotColor="#ccc"
               removeClippedSubviews={false}
               paginationStyle={{bottom: 0}}
-              activeDotStyle={{width:width*0.05}}
+              activeDotStyle={{width: width * 0.05}}
               activeDotColor={colors.headerIconColor}>
               {item.images.map((img, index) => (
                 <TouchableOpacity
@@ -249,21 +285,20 @@ const Productdetail = () => {
         <TouchableOpacity
           style={[
             styles.wishListWrapper,
-            {backgroundColor: colors.headerIconColor},
+            {backgroundColor: isadditem ? 'orange' : colors.headerIconColor},
+            {borderWidth: isadditem ? null : 1},
           ]}
           activeOpacity={0.6}
           onPress={() => {
-            if (itemNumber > 0) {
-              dispatch(addToCart({...item, quantity: itemNumber}));
-              setItemNumber(0); // Reset quantity after adding to cart
-              console.log('Item added to cart');
+            if (isadditem) {
+              gotocart();
             } else {
-              console.log('Please select at least 1 item');
+              addTocartitem();
             }
           }}>
           <EvilIcons name={'cart'} size={width * 0.079} color={colors.white} />
           <Text style={[styles.addtocartText, {color: colors.white}]}>
-            Add to cart
+            {isadditem ? 'Go to cart' : 'Add to cart'}
           </Text>
         </TouchableOpacity>
       </View>

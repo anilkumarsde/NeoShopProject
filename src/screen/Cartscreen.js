@@ -1,50 +1,38 @@
-import React from 'react';
 import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
   Dimensions,
-  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {removeFromCart, clearCart} from '../redux/cartSlice';
+import React, {useState} from 'react';
 import {colors} from '../utils/colors';
 import StatusBarCom from '../components/StatusBarCom';
+import Detailproductheader from '../components/Detailproductheader';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Orderstatus from '../components/Orderstatus';
+import {useSelector} from 'react-redux';
+import CartData from '../components/CartData';
 import {fonts} from '../utils/fonts';
+import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
-const CartScreen = () => {
+const Cartscreen = ({setItemNumber, itemNumber}) => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [maxStep, setMaxStep] = useState(0);
   const cartItems = useSelector(state => state.cart.items);
-  const dispatch = useDispatch();
-  console.log(cartItems, 'ddddd');
 
-  // Calculate the total amount
-  const getTotalAmount = () => {
-    return cartItems
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2);
-  };
+  const navigation = useNavigation();
 
-  // Render each cart item
-  const renderItem = ({item}) => (
-    <View style={styles.itemContainer}>
-      <Image source={{uri: item?.thumbnail}} style={styles.itemImages} />
-
-      <View style={styles.itemDetails}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
-        <Text style={styles.itemQuantity}>Qty: {item.quantity}</Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => dispatch(removeFromCart(item.id))}
-        style={styles.removeButton}>
-        <Text style={styles.removeButtonText}>Remove</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  function addressScreenHandler() {
+    if (currentStep === 0) {
+      setCurrentStep(1);
+      setMaxStep(1);
+      navigation.navigate('Address');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -52,118 +40,65 @@ const CartScreen = () => {
         backgraoundcolor={colors.backgroundColor}
         barStyle={'dark-content'}
       />
-      <Text style={styles.header}>🛒 Your Cart</Text>
-
-      <FlatList
-        data={cartItems}
-        keyExtractor={item => item.id.toString()}
-        renderItem={renderItem}
-        ListFooterComponent={() =>
-          cartItems.length > 0 && (
-            <View style={styles.footer}>
-              <Text style={styles.totalAmount}>Total: ${getTotalAmount()}</Text>
-              <TouchableOpacity
-                style={styles.clearButton}
-                onPress={() => dispatch(clearCart())}>
-                <Text style={styles.clearButtonText}>Clear Cart</Text>
-              </TouchableOpacity>
-              {/*  */}
-            </View>
-          )
+      <Detailproductheader
+        title={'Shopping Cart'}
+        icon={
+          <AntDesign
+            name="hearto"
+            color={colors.headerIconColor}
+            size={width * 0.065}
+          />
         }
       />
+      <ScrollView>
+        <Orderstatus
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          maxStep={maxStep}
+        />
+        <CartData setItemNumber={setItemNumber} itemNumber={itemNumber} />
+      </ScrollView>
+      <View style={styles.placeholderbtnWrapper}>
+        <TouchableOpacity
+          style={styles.placeOrderBtn}
+          activeOpacity={0.7}
+          onPress={addressScreenHandler}>
+          <Text style={styles.placeOrderTxt}>Place Order</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* <Text>Cartscreen</Text> */}
     </View>
   );
 };
 
-export default CartScreen;
+export default Cartscreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    padding: width * 0.032,
-    paddingHorizontal: width * 0.04,
   },
-  header: {
-    fontSize: width * 0.06,
-    fontFamily: fonts.MontserratSemiBold,
-    marginBottom: height * 0.02,
-    color: colors.black,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  placeOrderBtn: {
+    backgroundColor: colors.headerIconColor,
+    marginHorizontal: width * 0.04,
+    marginTop: height * 0.02,
+    // marginVertical: height * 0.01,
+    paddingVertical: height * 0.02,
     alignItems: 'center',
-    backgroundColor: colors.white,
-    marginBottom: height * 0.01,
-    padding: width * 0.05,
-    borderRadius: width * 0.03,
-    elevation: 0.5,
-  },
-  itemDetails: {
-    flex: 1,
-  },
-  itemTitle: {
-    fontSize: width * 0.042,
-    fontFamily: fonts.MontserratMedium,
-    color: colors.black,
-    paddingBottom: width * 0.01,
-  },
-  itemPrice: {
-    fontSize: width * 0.037,
-    fontFamily: fonts.MontserratRegular,
-    color: colors.grey,
-    paddingBottom: width * 0.01,
-  },
-  itemQuantity: {
-    fontSize: width * 0.036,
-    fontFamily: fonts.MontserratRegular,
-    color: colors.grey,
-  },
-  removeButton: {
-    backgroundColor: colors.btnColor,
-    paddingVertical: height * 0.005,
-    paddingHorizontal: width * 0.02,
-    borderRadius: width * 0.02,
-    // justifyContent:'center',
+    borderRadius: width * 0.1,
+    justifyContent: 'center',
     // alignItems:'center'
   },
-  removeButtonText: {
+  placeOrderTxt: {
     color: colors.white,
     fontFamily: fonts.MontserratMedium,
-    fontSize: width * 0.024,
+    fontSize: width * 0.037,
   },
-  footer: {
-    marginTop: height * 0.04,
+  placeholderbtnWrapper: {
+    height: height * 0.1,
     backgroundColor: colors.white,
-
-    padding: width * 0.05,
-    borderRadius: width * 0.03,
-    elevation: 0.3,
-  },
-  totalAmount: {
-    fontSize: width * 0.04,
-    fontFamily: fonts.MontserratSemiBold,
-    marginBottom: height * 0.02,
-    color: colors.black,
-    textAlign: 'center',
-  },
-  clearButton: {
-    backgroundColor: '#ff6347',
-    paddingVertical: height * 0.015,
-    borderRadius: width * 0.02,
-  },
-  clearButtonText: {
-    color: colors.white,
-    fontFamily: fonts.MontserratMedium,
-    fontSize: width * 0.04,
-    textAlign: 'center',
-  },
-  itemImages: {
-    resizeMode: 'contain',
-    height: width * 0.2,
-    width: '20%',
-    marginRight: width * 0.04,
+    // justifyContent:'center',
+    // alignItems:'center'
   },
 });

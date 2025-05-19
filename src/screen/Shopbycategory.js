@@ -35,6 +35,13 @@ const Shopbycategory = () => {
     navigation.goBack();
   };
 
+  function formatText(sub) {
+    return sub
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   const renderCategoryItem = ({item}) => (
     <View style={styles.categoryContainer}>
       <TouchableOpacity
@@ -63,7 +70,7 @@ const Shopbycategory = () => {
             <TouchableOpacity
               key={index}
               onPress={() => handleSubcategoryPress(sub)}>
-              <Text style={styles.subcategoryText}>{sub}</Text>
+              <Text style={styles.subcategoryText}>{formatText(sub)}</Text>
             </TouchableOpacity>
           ))}
         </View>

@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
-const ProductList = ({productdata,title}) => {
+const ProductList = ({productdata, title}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef(null);
   const navigation = useNavigation();
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
     marginBottom: height * 0.02,
   },
   headerTxt: {
-    fontSize:width*0.04,
-    color:colors.headerIconColor,
-    fontFamily:fonts.MontserratBold
+    fontSize: width * 0.04,
+    color: colors.headerIconColor,
+    fontFamily: fonts.MontserratBold,
   },
   productlistWrapper: {
     // backgroundColor: 'red',

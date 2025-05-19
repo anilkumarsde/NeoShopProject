@@ -205,8 +205,8 @@ const styles = StyleSheet.create({
   },
   serachProductWrapper: {
     paddingHorizontal: width * 0.04,
-    marginBottom: height * 0.17,
-    marginTop: height * 0.02,
+    marginBottom: height * 0.2,
+    // marginTop: height * 0.015,
   },
   loaderWrapper: {
     flex: 1,
