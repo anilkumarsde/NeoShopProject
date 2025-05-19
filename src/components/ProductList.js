@@ -103,7 +103,9 @@ export default ProductList;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: width * 0.04,
-    marginTop: height * 0.05,
+    // marginTop: height * 0.05,
+    // backgroundColor:'red',
+    marginBottom:width*0.01
 
     // width:'100%'
   },
